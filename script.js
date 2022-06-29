@@ -49,18 +49,49 @@
 
 // Constructor object
 // Menggunakan new untuk menginstansi objek baru
-function Mahasiswa(nama, health) {
-  this.nama = nama;
-  this.health = health;
+// function Mahasiswa(nama, health) {
+//   this.nama = nama;
+//   this.health = health;
 
-  this.makan = function (porsi) {
+//   this.makan = function (porsi) {
+//     this.health += porsi;
+//     console.log(`Sekarang health ${this.nama} bertambah ${this.health}`);
+//   };
+//   this.main = function (jam) {
+//     this.health -= jam;
+//     console.log(`Sekarang health ${this.nama} tersisa ${this.health}`);
+//   };
+// }
+
+// let sulthan = new Mahasiswa("Sulthan", 10);
+
+// Menggunakan Object.create()
+// Bisa dipanggil tanpa harus menulisakan method berulang kali
+
+const mehtodMahasiswa = {
+  makan: function (porsi) {
     this.health += porsi;
-    console.log(`Sekarang health ${this.nama} bertambah ${this.health}`);
-  };
-  this.main = function (jam) {
+    console.log(`Sekarang health ${this.nama} menjadi ${this.health}`);
+  },
+  main: function (jam) {
     this.health -= jam;
     console.log(`Sekarang health ${this.nama} tersisa ${this.health}`);
-  };
+  },
+  tidur: function (jam) {
+    this.health += jam * 2;
+    console.log(
+      `Sekarang health ${this.nama} bertambah menjadi ${this.health}`
+    );
+  },
+};
+
+function Mahasiswa(nama, health) {
+  // Pemanggilan method dengan object.create
+  let mahasiswa = Object.create(mehtodMahasiswa);
+  mahasiswa.nama = nama;
+  mahasiswa.health = health;
+
+  return mahasiswa;
 }
 
-let sulthan = new Mahasiswa("Sulthan", 10);
+let sulthan = Mahasiswa("sulthan", 18);
